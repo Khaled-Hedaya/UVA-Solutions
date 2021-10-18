@@ -9,9 +9,9 @@ const int N = 1e5 + 10, OO = 0x3f3f3f3f;
 "Maybe they aren't stars.. Maybe they are a map to get out of here"
 */
 
-int n, m, finished[128];
+int n, m, finished[26];
 char s[4];
-vector<int> adj[128];
+vector<int> adj[26];
 
 int main() {
 //    FastIO()
@@ -20,7 +20,7 @@ int main() {
 #endif
 
     while (~scanf("%d", &n)) {
-        for (int i = 0; i < 128; ++i) {
+        for (int i = 0; i < 26; ++i) {
             finished[i] = 0;
             adj[i].clear();
         }
@@ -54,7 +54,7 @@ int main() {
                 }
             }
         }
-        int total = count(finished, finished + 128, 1);
+        int total = count(finished, finished + 26, 1);
         if (total == n) printf("WAKE UP IN, %d, YEARS\n", ans);
         else puts("THIS BRAIN NEVER WAKES UP");
     }
