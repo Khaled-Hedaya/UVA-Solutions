@@ -18,7 +18,7 @@ bool valid(int x,  int y) {
 	return x >= 0 && x < n && y >= 0 && y < m;
 }
 
-ll solve(int r , int c) {
+ll top_down(int r , int c) {
 	if (!valid(r , c) || blocked[r][c])
 		return 0;
 
@@ -28,11 +28,32 @@ ll solve(int r , int c) {
 	ll &ret = dp[r][c];
 	if (~ret) return ret;
 	ret = 0;
-	ret += solve(r + 1, c);
-	ret += solve(r, c + 1);
+	ret += top_down(r + 1, c);
+	ret += top_down(r, c + 1);
 	return ret;
 }
 
+ll bottom_up() {
+
+	memset(dp, 0, sizeof dp);
+	if (blocked[0][0])
+		return 0;
+
+	// base cases
+	dp[0][0] = 1;
+	for (int c = 1; c < m && !blocked[0][c]; ++c)
+		dp[0][c] = 1;
+	for (int r = 1; r < n && !blocked[r][0]; ++r)
+		dp[r][0] = 1;
+	// calculating subproblems
+	for (int i = 1; i < n ; ++i) {
+		for (int j = 1 ; j < m ; ++j) {
+			if (!blocked[i][j])
+				dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+		}
+	}
+	return dp[n - 1][m - 1];
+}
 
 
 int main() {
@@ -61,7 +82,8 @@ int main() {
 				blocked[r - 1][c - 1] = 1;
 		}
 
-		cout << solve(0 , 0) << "\n";
+		cout << top_down(0 , 0) << "\n";
+		// cout << bottom_up() << "\n";
 		if (tc)
 			cout << "\n";
 	}
