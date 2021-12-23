@@ -1,6 +1,6 @@
 //problem link: https://leetcode.com/problems/search-in-rotated-sorted-array/
-//idea: using just one single binary search, we decide were to go the big part (ex: {456} - 0123) or go to the small part (ex: 456 - {0123})
-//      depending on whether the target and the cur binary search value fall on the same part or we need to swap to the other part
+//idea: using just one single binary search, we decide whether to go the big part (ex: {456} - 0123) or go to the small part (ex: 456 - {0123})
+//      depending on whether the target and the current binary search value fall on the same part or we need to swap to the other part
 // O(logn), where n is the size of the input array
 
 class Solution {
